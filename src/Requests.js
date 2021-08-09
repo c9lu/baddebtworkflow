@@ -64,13 +64,17 @@ function Requests(props){
       <div className="App">
        
           <div>
-            <h1>Welcome to the Bad debt workflow deomo</h1>
+            <h1>Welcome to the Bad debt workflow demo</h1>
 {
+  <br/>
  //            eslint-disable-next-line   
-}              <a href="https://author-opgi-dev-4.adobecqms.net/content/dam/formsanddocuments/bad-debt-workflow/jcr:content?wcmmode=disabled" target="_blank">Create New Request</a>
-           { loadingData?(<p>Loading please wait</p>):(
+}              <a href="https://author-opgi-dev-4.adobecqms.net/content/dam/formsanddocuments/bad-debt-workflow/jcr:content?wcmmode=disabled" text-align="left"target="_blank">Create New Request</a>
+         {<br/>}
+           { 
+           
+           loadingData?(<p>Loading please wait</p>):(
             <div>
-              
+             <br/> 
             <BTable striped bordered hover> 
               <thead>
                 <th>Request Id</th>

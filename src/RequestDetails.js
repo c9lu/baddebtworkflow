@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import $ from "jquery";
 import './App.css';
 import getWorkflowStatus from './GetWorkflowStatus';
-
+import { Link } from 'react-router-dom';
 
 function  GetApprovalSteps(requestDetails, workflowItems){
 
@@ -121,7 +121,12 @@ function RequestDetails(props){
         return (
             <div style={{padding:'50px', textAlign:'left'}}>
                 {loadingData?(<p>Loading please wait</p>):(
-               <div><h3>Request Details</h3>
+               <div>
+                   {// eslint-disable-next-line     
+               <div><Link to='/Requests'>Home</Link></div>
+            }
+                   <h3>Request Details</h3>
+               
                <div>
                <table cellPadding="5" cellSpacing="5">
                 <tr>
@@ -187,25 +192,26 @@ function RequestDetails(props){
                 </div>
                 <br/>
                 <br/>
-                {data.requestLink!=='NA'?
+                {data.amount>25 && data.requestLink!=='NA'?
                   // eslint-disable-next-line
                     <a href={data.requestLink} target="_blank">Go to AEM to approve or reject the request</a>
                 :null}  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
 
-                <a href={'data:application/xml;charset=utf-8,'+data.submittedData} download={'SubmittedData_'+data.requestName+'.xml'}
-                id="downloadData">Download submitted data</a> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
-               {
-                // eslint-disable-next-line
-                <a href="https://author-opgi-dev-4.adobecqms.net/aem/formdetails.html/content/dam/formsanddocuments/bad-debt-workflow#previewcustom" target="_blank">Preview submitted data in AEM</a>
-               
-                } &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-
-                {data.requestStatus==='Approved' || data.requestStatus==='Rejected'?
+{(data.amount>25 && (data.requestStatus==='Approved' || data.requestStatus==='Rejected'))? 
                 
                 // eslint-disable-next-line                
                 <a href={localStorage.getItem('AEMLink'+requestId)}target="_blank">View Request in AEM</a>
                :null
-               }
+               }&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                <a href={'data:application/xml;charset=utf-8,'+data.submittedData} download={'SubmittedData_'+data.requestName+'.xml'}
+                id="downloadData">1) Download submitted data</a> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+               {
+                // eslint-disable-next-line
+                <a href="https://author-opgi-dev-4.adobecqms.net/aem/formdetails.html/content/dam/formsanddocuments/bad-debt-workflow#previewcustom" target="_blank">2) Preview submitted data in AEM</a>
+               
+                } 
+
+                
             </div>
         
                 

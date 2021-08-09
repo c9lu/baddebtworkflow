@@ -21,7 +21,10 @@ function SavedDrafts(){
                     console.log(`${key}`);
                     if(key.indexOf('jcr')<0){
                         var _lastModified = value["jcr:lastModified"];
-                        savedDrafts.push({key, _lastModified});
+                        var _draftUrl = value["userdataID"];
+                        _draftUrl = _draftUrl.replaceAll('/','%2F');
+                        _draftUrl = _draftUrl.replace('%40oxfordproperties','%2540oxfordproperties');
+                        savedDrafts.push({_draftUrl, _lastModified});
 
                     }
 
@@ -37,6 +40,9 @@ function SavedDrafts(){
     return (<div>
 
             <h3>Saved Drafts</h3>
+              {// eslint-disable-next-line     
+               <div><Link to='/Requests'>Home</Link></div>
+            }
             <div>
 
                 Please enter in your netowrk username without the underscore:&nbsp;&nbsp; &nbsp;&nbsp;
@@ -53,9 +59,9 @@ function SavedDrafts(){
                         data.map((draft, index)=>{
                             return(
                             <div>{index}. {draft['_lastModified']}
-                            
+                        
                        &nbsp;&nbsp;
-                             <Link to={`https://52.232.134.199/crx/de/download.jsp?path=/content/forms/fp/`+$("#networkUserName").val()+`%40oxfordproperties.com/drafts/data/`+draft['key']+'jcr:data&index=0'}>Download</Link>                              
+                <a href={`https://52.232.134.199/crx/de/download.jsp?path=`+draft['_draftUrl']+'%2Fjcr%3Adata&index=0'}>Download</a>                              
                             
                             </div>
                             )

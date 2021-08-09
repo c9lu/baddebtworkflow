@@ -94,6 +94,8 @@ function RequestDetails(props){
                                 }
                                else if(requestDetails.requestLink===''){
                                     requestDetails.requestLink = 'NA';
+                                   // requestDetails.requestLink = workflowItem[1].workItem.metaData.workitem_url;
+                                    localStorage.setItem('AEMLink'+requestId,  workflowItem[1].workItem.metaData.workitem_url);
                                     
                                 }
                             }
@@ -201,7 +203,7 @@ function RequestDetails(props){
                 {data.requestStatus==='Approved' || data.requestStatus==='Rejected'?
                 
                 // eslint-disable-next-line                
-                <a href={localStorage.getItem('AEMLink'+requestId)}target="_blank">Go to AEM Request</a>
+                <a href={localStorage.getItem('AEMLink'+requestId)}target="_blank">View Request in AEM</a>
                :null
                }
             </div>
